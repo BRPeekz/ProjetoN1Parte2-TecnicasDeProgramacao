@@ -1,4 +1,12 @@
-def menu_opcoes(menu):
+def inserirUsuarios(dicionario_usuarios):
+
+    nome = str(input("Digite o seu nome: "))
+    email = str(input("Digite o seu email: "))
+
+    dicionario_usuarios[nome] = email
+    return dicionario_usuarios
+
+def menu_opcoes(menu,dicionario_usuarios):
     i = False
     exit = False
 
@@ -11,7 +19,7 @@ def menu_opcoes(menu):
 
     while(i == False):
         if(menu == 1):
-            #Inserir função 1
+            inserirUsuarios(dicionario_usuarios)
             i = True
         elif(menu == 2):
             #Inserir função 2
@@ -20,7 +28,7 @@ def menu_opcoes(menu):
             #Inserir função 3
             i = True
         elif(menu == 4):
-            #Inserir função 4
+            #Inserir função 4a
             i = True
         elif(menu == 5):
             #Inserir função 5
@@ -33,7 +41,7 @@ def menu_opcoes(menu):
             exit = True
         else:
             menu = int(input('Menu inválido. Por favor, digite o menu desejado:\n'))
-    return(exit)
+    return(exit, dicionario_usuarios)
 
 #Daqui pra cima são as funções 
 ##################################################################################
@@ -44,4 +52,4 @@ exit = False
 menu = 0
 
 while(exit == False):
-    exit = menu_opcoes(menu)
+    exit,dicionario_usuarios = menu_opcoes(menu,dicionario_usuarios)
