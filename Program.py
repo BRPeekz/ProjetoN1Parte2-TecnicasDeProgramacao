@@ -1,12 +1,14 @@
-def inserirUsuarios(dicionario_usuarios):
+def inserirUsuarios(lista_nomes, lista_emails):
 
     nome = str(input("Digite o seu nome: "))
     email = str(input("Digite o seu email: "))
 
-    dicionario_usuarios[nome] = email
-    return dicionario_usuarios
+    lista_nomes.append(nome)
+    lista_emails.append(email)
 
-def menu_opcoes(menu,dicionario_usuarios):
+    return lista_nomes, lista_emails
+
+def menu_opcoes(menu,lista_nomes,lista_emails):
     i = False
     exit = False
 
@@ -19,7 +21,7 @@ def menu_opcoes(menu,dicionario_usuarios):
 
     while(i == False):
         if(menu == 1):
-            inserirUsuarios(dicionario_usuarios)
+            lista_nomes, lista_emails = inserirUsuarios(lista_nomes, lista_emails)
             i = True
         elif(menu == 2):
             #Inserir função 2
@@ -41,15 +43,16 @@ def menu_opcoes(menu,dicionario_usuarios):
             exit = True
         else:
             menu = int(input('Menu inválido. Por favor, digite o menu desejado:\n'))
-    return(exit, dicionario_usuarios)
+    return(exit, lista_nomes,lista_emails)
 
 #Daqui pra cima são as funções 
 ##################################################################################
 #Daqui pra baixo é o programa principal
 
-dicionario_usuarios = dict()
+lista_nomes = []
+lista_emails = []
 exit = False
 menu = 0
 
 while(exit == False):
-    exit,dicionario_usuarios = menu_opcoes(menu,dicionario_usuarios)
+    exit,lista_nomes,lista_emails = menu_opcoes(menu,lista_nomes,lista_emails)
