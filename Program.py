@@ -1,5 +1,6 @@
 def inserirUsuarios(lista_nomes, lista_emails):
 
+
     nome = str(input("Digite o seu nome: "))
     email = str(input("Digite o seu email: "))
 
@@ -7,6 +8,13 @@ def inserirUsuarios(lista_nomes, lista_emails):
     lista_emails.append(email)
 
     return lista_nomes, lista_emails
+
+def listarUsuarios(lista_nomes, lista_emails):
+    cont = 0
+
+    for cada in lista_nomes:
+        print(lista_nomes[cont], ":", lista_emails[cont])
+        cont+=1 
 
 def menu_opcoes(menu,lista_nomes,lista_emails):
     i = False
@@ -24,7 +32,7 @@ def menu_opcoes(menu,lista_nomes,lista_emails):
             lista_nomes, lista_emails = inserirUsuarios(lista_nomes, lista_emails)
             i = True
         elif(menu == 2):
-            #Inserir função 2
+            listarUsuarios(lista_nomes, lista_emails)
             i = True
         elif(menu == 3):
             #Inserir função 3
