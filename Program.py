@@ -9,6 +9,21 @@ def inserirUsuarios(lista_nomes, lista_emails):
 
     return lista_nomes, lista_emails
 
+def find_name(lista_nomes, lista_emails):
+    i = False
+    while(i == False):
+        name = input("Insira o nome de quem procuras: \n")
+        if(name in lista_nomes):
+            index = lista_nomes.index(name)
+            print("As informações associadas ao nome {} é:\nE-mail: {}".format(name,lista_emails[index]))
+
+            i = True
+        else: 
+            print('Valor não encontrado')
+
+            i = False
+
+
 def listarUsuarios(lista_nomes, lista_emails):
     cont = 0
 
@@ -38,7 +53,7 @@ def menu_opcoes(menu,lista_nomes,lista_emails):
             #Inserir função 3
             i = True
         elif(menu == 4):
-            #Inserir função 4a
+            find_name(lista_nomes, lista_emails)
             i = True
         elif(menu == 5):
             #Inserir função 5
