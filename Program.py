@@ -1,3 +1,5 @@
+from collections import OrderedDict 
+
 def inserirUsuarios(lista_nomes, lista_emails):
 
 
@@ -8,6 +10,20 @@ def inserirUsuarios(lista_nomes, lista_emails):
     lista_emails.append(email)
 
     return lista_nomes, lista_emails
+
+def listarUsuarios(lista_nomes, lista_emails):
+    cont = 0
+
+    for cada in lista_nomes:
+        print(lista_nomes[cont], ":", lista_emails[cont])
+        cont+=1 
+
+def listarUsuariosAlfabetica(lista_nomes, lista_emails):
+    dicionario = dict(zip(lista_nomes, lista_emails))
+    dicionarioAlfab = OrderedDict(sorted(dicionario.items()))
+
+    for item in dicionarioAlfab:
+        print(item, ":", dicionarioAlfab[item])
 
 def find_name(lista_nomes, lista_emails):
     i = False
@@ -23,15 +39,33 @@ def find_name(lista_nomes, lista_emails):
 
             i = False
 
+def remover_usuario(lista_nomes, lista_emails):
+    email = input('Digite o email do usuário: ')
+    if email in lista_emails:
+        index = lista_emails.index(email)
+        nome = lista_nomes[index]
 
-def listarUsuarios(lista_nomes, lista_emails):
-    cont = 0
+        print('O usuário {} foi removido.'.format(lista_nomes[index]))
 
-    for cada in lista_nomes:
-        print(lista_nomes[cont], ":", lista_emails[cont])
-        cont+=1 
+        lista_nomes.remove(nome)
+        lista_emails.remove(email)
+    else:
+        print('Não foi localizado nenhum email.')
+    return(lista_nomes, lista_emails)
 
-def menu_opcoes(menu,lista_nomes,lista_emails):
+def alterar_nome(lista_nomes, lista_emails):
+    email = input('Digite o email do usuário: ')
+    if email in lista_emails:
+        index = lista_emails.index(email)
+        print('O nome do usuário é {}'.format(lista_nomes[index]))
+        lista_nomes[index] = input('Digite o novo nome do usuário: ')
+        print('O nome do usuário agora é {}'.format(lista_nomes[index]))
+    else:
+        print('Não foi localizado nenhum email.')
+
+    return(lista_nomes, lista_emails)
+
+def main(menu,lista_nomes,lista_emails):
     i = False
     exit = False
 
@@ -50,27 +84,23 @@ def menu_opcoes(menu,lista_nomes,lista_emails):
             listarUsuarios(lista_nomes, lista_emails)
             i = True
         elif(menu == 3):
-            #Inserir função 3
+            listarUsuariosAlfabetica(lista_nomes, lista_emails)
             i = True
         elif(menu == 4):
             find_name(lista_nomes, lista_emails)
             i = True
         elif(menu == 5):
-            #Inserir função 5
+            lista_nomes, lista_emails = remover_usuario(lista_nomes, lista_emails)
             i = True
         elif(menu == 6):
-            #Inserir função 6
+            lista_nomes, lista_emails = alterar_nome(lista_nomes, lista_emails)
             i = True
         elif(menu == 7):
             i = True
             exit = True
         else:
             menu = int(input('Menu inválido. Por favor, digite o menu desejado:\n'))
-    return(exit, lista_nomes,lista_emails)
-
-#Daqui pra cima são as funções 
-##################################################################################
-#Daqui pra baixo é o programa principal
+    return(exit, lista_nomes, lista_emails)
 
 lista_nomes = []
 lista_emails = []
@@ -78,4 +108,4 @@ exit = False
 menu = 0
 
 while(exit == False):
-    exit,lista_nomes,lista_emails = menu_opcoes(menu,lista_nomes,lista_emails)
+    exit,lista_nomes,lista_emails = main(menu,lista_nomes,lista_emails)
